@@ -1,0 +1,8 @@
+{
+  "name": "Copy of YoSinTV Sports",
+  "description": "A comprehensive sports app for live cricket and football matches, highlights, and news.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

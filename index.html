@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>YoSinTV Sports</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google AdSense for Responsive Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5525538810839147" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --primary-blue: #1f41bb;
+      --live-red: #ef4444;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-400: #94a3b8;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --soft-black: #111827;
+    }
+
+    html, body {
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--soft-black);
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: contain;
+    }
+
+    .font-sport {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* Dark Mode Global */
+    .dark body {
+      background-color: #020617;
+      color: #f1f5f9;
+    }
+
+    .safe-area-top { padding-top: env(safe-area-inset-top); }
+    .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Match Card Container & Styles */
+    .match-card {
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--slate-100);
+      padding: 10px 12px;
+      margin: 8px auto;
+      background: #ffffff;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark .match-card {
+      background: #111827;
+      border-color: #1f2937;
+    }
+
+    .match-card:active {
+      transform: scale(0.975);
+      background: var(--slate-50);
+    }
+
+    .match-card-ended {
+      background: #f9fafb !important;
+      opacity: 0.8;
+      filter: grayscale(0.2);
+    }
+
+    .dark .match-card-ended {
+      background: #0b0f1a !important;
+      opacity: 0.6;
+    }
+
+    .match-row-teams {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .match-team {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .match-team img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      margin-bottom: 4px;
+    }
+
+    .match-team-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000000;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+
+    .dark .match-team-name {
+      color: #ffffff;
+    }
+
+    .match-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      min-width: 80px;
+    }
+
+    .match-local-time {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--slate-400);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .match-status {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem !important;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+      display: inline-block;
+      min-width: 75px;
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .match-status-countdown {
+      background: #eff6ff;
+      color: var(--primary-blue);
+      border: 1px solid #dbeafe;
+    }
+
+    .dark .match-status-countdown {
+      background: rgba(31, 65, 187, 0.1);
+      border-color: rgba(31, 65, 187, 0.3);
+      color: #60a5fa;
+    }
+
+    .match-status-live {
+      background: var(--live-red);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+      animation: statusPulse 2s infinite ease-in-out;
+    }
+
+    .match-status-over {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+
+    .dark .match-status-over {
+      background: #1f2937;
+      color: #94a3b8;
+      border-color: #374151;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(0.96); }
+    }
+
+    .match-league-bar {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid #f1f5f9;
+      width: 100%;
+      text-align: center;
+    }
+
+    .dark .match-league-bar {
+      border-color: #1f2937;
+    }
+
+    .match-league-bar p {
+      font-size: 0.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0;
+      color: var(--slate-400);
+      letter-spacing: 0.15em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+      "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+      "react/": "https://esm.sh/react@^19.2.3/",
+      "react": "https://esm.sh/react@^19.2.3",
+      "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+    }
+  }
+  </script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
